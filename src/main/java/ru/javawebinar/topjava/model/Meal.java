@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,11 +11,23 @@ import java.time.LocalTime;
  * 11.01.2015.
  */
 public class Meal extends BaseEntity {
-    private final LocalDateTime dateTime;
+    protected  LocalDateTime dateTime;
+    protected String description;
+    protected int calories;
+    protected int userId;
 
-    private final String description;
 
-    private final int calories;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Meal() {
+
+    }
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
@@ -24,6 +38,18 @@ public class Meal extends BaseEntity {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
+    }
+
+    public Meal(Integer id, LocalDateTime dateTime, String description, int calories, int userId) {
+        super(id);
+        this.dateTime = dateTime;
+        this.description = description;
+        this.calories = calories;
+        this.userId = userId;
+    }
+
+    public Meal(Meal meal) {
+        this(meal.getId(),meal.getDateTime(),meal.getDescription(),meal.getCalories(),meal.getUserId());
     }
 
     public LocalDateTime getDateTime() {
@@ -44,6 +70,18 @@ public class Meal extends BaseEntity {
 
     public LocalTime getTime() {
         return dateTime.toLocalTime();
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
     @Override
