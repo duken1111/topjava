@@ -8,9 +8,14 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
  */
 public class ValidationUtil {
 
+    private ValidationUtil() {
+
+    }
 
     public static void checkNotFound(boolean found, String msg) {
-        if (!found) throw new NotFoundException("Not found entity with " + msg);
+        if (!found) {
+            throw new NotFoundException("Not found entity with " + msg);
+        }
     }
 
     public static void checkNew(BaseEntity entity) {
