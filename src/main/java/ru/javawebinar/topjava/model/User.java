@@ -46,7 +46,7 @@ public class User extends NamedEntity {
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "roles")
+    @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     protected Set<Role> roles;
 
