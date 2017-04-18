@@ -33,6 +33,7 @@ public class JpaMealRepositoryImpl implements MealRepository {
     @Override
     @Transactional
     public Meal save(Meal meal, int userId)     {
+
         User ref = em.getReference(User.class, userId);
         meal.setUser(ref);
         if(meal.isNew()) {
