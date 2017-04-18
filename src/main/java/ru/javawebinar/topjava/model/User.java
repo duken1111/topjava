@@ -46,11 +46,11 @@ public class User extends NamedEntity {
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "roles")
+    @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     protected Set<Role> roles;
 
-    @Column(name="calories_per_day", columnDefinition = "int defaukt 2000")
+    @Column(name="calories_per_day", columnDefinition = "int default 2000")
     @Digits(fraction = 0, integer = 4)
     protected int caloriesPerDay = MealsUtil.DEFAULT_CALORIES_PER_DAY;
 

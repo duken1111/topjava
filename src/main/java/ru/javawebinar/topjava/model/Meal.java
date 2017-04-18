@@ -1,7 +1,9 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.Table;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,14 +12,33 @@ import java.time.LocalTime;
  * GKislin
  * 11.01.2015.
  */
+@NamedQueries({
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
+        @NamedQuery(name = Meal.GET_ALL, query = "SELECT m FROM Meal m WHERE m.user=:user_id ORDER BY m.dateTime")
+})
+
+@Entity
+@javax.persistence.Table(name="meals",indexes = {@Index(name="meals_unique_user_datetime_idx",columnList = "user_id,date_time",unique = true)})
 public class Meal extends BaseEntity {
+
+    public final static String DELETE = "Meal.delete";
+    public final static String GET_ALL = "Meal.getall";
+
+    @Column(name="date_time", nullable = false, columnDefinition = "timestamp default now()")
+    @NotEmpty
     private LocalDateTime dateTime;
 
+    @Column(name="description",nullable = false)
+    @NotEmpty
     private String description;
 
+    @Column(name="calories", nullable = false)
+    @NotEmpty
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @NotEmpty
     private User user;
 
     public Meal() {
