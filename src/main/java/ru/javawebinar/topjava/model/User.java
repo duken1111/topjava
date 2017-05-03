@@ -68,7 +68,7 @@ public class User extends NamedEntity {
     @Range(min = 10, max = 10000)
     protected int caloriesPerDay = MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("dateTime DESC")
     //@Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
