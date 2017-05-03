@@ -1,8 +1,8 @@
 package ru.javawebinar.topjava.model;
 
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
+
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,6 +10,11 @@ import org.hibernate.validator.constraints.Range;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
@@ -19,6 +24,8 @@ import java.util.Set;
  * User: gkislin
  * Date: 22.08.2014
  */
+
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
@@ -50,6 +57,7 @@ public class User extends NamedEntity {
     @Column(name="registered", columnDefinition = "timestamp default now()")
     protected Date registered = new Date();
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
