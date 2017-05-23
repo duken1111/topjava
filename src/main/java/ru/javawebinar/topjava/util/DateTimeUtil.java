@@ -36,7 +36,7 @@ public class DateTimeUtil {
     }
 
     public static LocalDateTime parseLocalDateTime(String str) {
-        return parseLocalDateTime(str, DATE_TIME_FORMATTER);
+        return parseLocalDateTime(str, DATE_TME_FORMATTER);
     }
 
     public static LocalDateTime parseLocalDateTime(String str, DateTimeFormatter formatter) {
