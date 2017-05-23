@@ -70,6 +70,7 @@ public class User extends NamedEntity {
     @OrderBy("dateTime DESC")
     //@Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
+//    @JsonIgnore
     protected List<Meal> meals;
 
     public User() {
