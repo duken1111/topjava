@@ -107,3 +107,6 @@
 </div>
 </body>
 </html>
+
+
+<img alt="" src="http://media.artek.org/media/uploads/Rabota%20s%20detmi/Shkola/pic/documentpdf7015.png" style="width: 25px; height: 25px;" />
