@@ -8,10 +8,8 @@ import ru.javawebinar.topjava.util.UserUtil;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class UserTo implements Serializable {
+public class UserTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    private Integer id;
 
     @NotBlank
     private String name;
@@ -30,19 +28,11 @@ public class UserTo implements Serializable {
     }
 
     public UserTo(Integer id, String name, String email, String password, int caloriesPerDay) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.email = email;
         this.password = password;
         this.caloriesPerDay = caloriesPerDay;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getPassword() {
@@ -67,10 +57,6 @@ public class UserTo implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public boolean isNew() {
-        return id == null;
     }
 
     public Integer getCaloriesPerDay() {

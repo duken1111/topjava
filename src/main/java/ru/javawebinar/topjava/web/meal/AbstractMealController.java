@@ -56,6 +56,7 @@ public abstract class AbstractMealController {
         checkNew(meal);
         int userId = AuthorizedUser.id();
         LOG.info("create {} for User {}", meal, userId);
+        checkNew(meal);
         return service.save(meal, userId);
     }
 
