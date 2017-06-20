@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
 
 /**
@@ -14,6 +15,10 @@ import ru.javawebinar.topjava.to.UserTo;
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {
     static final String REST_URL = "/rest/profile";
+
+    public ProfileRestController() {
+        super();
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
