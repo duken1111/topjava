@@ -1,11 +1,13 @@
 package ru.javawebinar.topjava.web.meal;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.ValidationUtil;
@@ -25,6 +27,7 @@ import java.util.List;
 public class MealAjaxController extends AbstractMealController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @JsonView(View.JsonUI.class)
     public List<MealWithExceed> getAll() {
         return super.getAll();
     }
@@ -35,6 +38,7 @@ public class MealAjaxController extends AbstractMealController {
     }
 
     @PostMapping
+    @JsonView(View.JsonUI.class)
     public ResponseEntity<String> createOrUpdate(@Valid Meal meal, BindingResult result) {
         if (result.hasErrors()) {
             return ValidationUtil.getErrorResponse(result);
@@ -49,6 +53,7 @@ public class MealAjaxController extends AbstractMealController {
     }
 
     @PostMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @JsonView(View.JsonUI.class)
     public List<MealWithExceed> getBetween(
             @RequestParam(value = "startDate", required = false) LocalDate startDate,
             @RequestParam(value = "startTime", required = false) LocalTime startTime,
