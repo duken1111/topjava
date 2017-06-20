@@ -41,6 +41,7 @@ public class MealAjaxController extends AbstractMealController {
     @JsonView(View.JsonUI.class)
     public ResponseEntity<String> createOrUpdate(@Validated(View.ValidatedUI.class) Meal meal, BindingResult result) {
         if (result.hasErrors()) {
+            // TODO change to exception handler
             return ValidationUtil.getErrorResponse(result);
         }
 
